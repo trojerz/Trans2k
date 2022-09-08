@@ -1,0 +1,51 @@
+General information (objects name, backgrounds name):
+object_path: objects/transparent_animal_3.obj
+output_path: RenderedVideos/GOT10k/GOT-10k_Train_000001
+background_path: GOT10k/GOT-10k_Train_000001
+length: 5
+Camera information:
+resolution_x: 1280
+resolution_y: 720
+x_position: 1.7777777
+z_position: 1
+Light information:
+room_illumination: 4.048160433045145
+light_energy: 15.791581080877425
+light_type: POINT
+light_position: [0, -1.4, 0.3]
+light_position_noise: [-0.2, -0.4, -0.1, 0.2, 0, 0.1]
+Material information:
+materials: high_transparent
+Object information:
+dim_x: 0.032184947317823016
+dim_y: 0.04075762608294363
+dim_z: 0.04291878837943523
+rotation_x: 0.01066684014261995
+rotation_y: 0.008903623102407377
+rotation_z: 0.003883944060609883
+random_scale_object: 0.022327368639754177
+over_the_edge: 0.9
+Distractors information:
+include_distractor: 0
+distractor_objects: []
+distractor_position: [[-0.6, 0.6, 0, 0.3], [0, 0.3, -0.1, -0.1]]
+dim_dist_x: 0.046163797338244675
+dim_dist_y: 0.04073148748260595
+dim_dist_z: 0.04086467416203531
+rotation_dist_x: 0.015124809087962777
+rotation_dist_y: 0.016231503283809654
+rotation_dist_z: 0.0013562488272145672
+rotation_noise_lower: -0.045659858613125937
+rotation_noise_upper: 0.012547079486921409
+rotation_dist_z: 0.0013562488272145672
+random_scale_distractor: 0.0480885346940542
+Occlusion information:
+add_occlusion: False
+occlusion_type: no_occlusion
+add_occlusion_vertical: False
+line_width: 0.04
+occlusion_color: (0.5553871855148509, 0.5957573594948424, 0.3277591252759753)
+Blur information:
+blur_include: False
+blur_type: no_blur
+blur_intensity: 0

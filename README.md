@@ -10,6 +10,8 @@ If you use Trans2k or Rendering Machine in a research project, please cite as fo
 add here
 ```
 
+## 
+
 ## Installation
 
 ### Git clone
@@ -56,6 +58,14 @@ python preprocess_dataset.py
 ```
 
 ## Usage
+
+### Examples
+
+* [Basic scene](Examples/basic_scene/README.md): Basic example for construction of the scene, this is the ideal place to get an idea how sequences are generated.
+
+
+### Generating dataset
+
 
 Rendering Machine has to be run inside the blender python environment, as only there we can access the blender API. 
 Therefore, instead of running rendering machine with the usual python interpreter, the command line interface of BlenderProc has to be used.

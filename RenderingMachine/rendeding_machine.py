@@ -618,8 +618,10 @@ class TransparentObjectRender:
         bpy.context.scene.cycles.glossy_bounces = 8
         bpy.context.scene.cycles.transmission_bounces = 8
         bpy.context.scene.cycles.volume_bounces = 8
-        self.set_plastic_material()
-        #self.set_glass_material()
+        if self.material_type == 'Plastic':
+            self.set_plastic_material()
+        else:
+            self.set_glass_material()
 
     def construct_scene(self):
         # create a list of background names and sort it ascending, so the video will be correct
@@ -854,6 +856,10 @@ profiles = ['low_transparent', 'med_low_transparent', 'high_transparent', 'med_h
 occlusion_types = [0.01, 0.02, 0.04]
 # define the names of occlusion
 occlusion_names = ['high_occlusion', 'medium_occlusion', 'low_occlusion']
+# define the blur intensity
+blur_intensity_vec = [1 / 8, 1 / 4, 1 / 2]  # 1/8 # between 0 and 1, where 0 = No blur, 1 = very high blur
+# define the blur names
+blur_names = ["low_blur", "medium_blur", "high_blur"]
 # where backgrounds sequences are saved
 background_dir = "GOT10k"
 # where to save rendered sequences
@@ -886,7 +892,13 @@ if __name__ == '__main__':
     objects = list(sorted([os.path.join(objects_dir + '/', p) for p in os.listdir(objects_dir + '/') if p.lower().endswith('obj')]))
     random.shuffle(objects)
 
+
     for m, vid_dir_ in enumerate(original_video_dirs_):
+        resolution_x = 1280  # X resolution of a camera - DO NOT CHANGE
+        resolution_y = 720  # Y resolution of a camera - DO NOT CHANGE
+        x_position = 1.7777777  # X position of a camera - DO NOT CHANGE
+        z_position = 1  # Z position of a camera - DO NOT CHANGE
+
         # with 0.2 probability include distractors
         if random.random() <= 0.2:
             distractor_include = 1
@@ -910,29 +922,24 @@ if __name__ == '__main__':
         object_path = object_path
         output_path = rendered_video_dirs_[m]  # path to the folder to save results
         background_path = vid_dir_  # path to the folder with background images
-        resolution_x = 1280  # X resolution of a camera - DO NOT CHANGE
-        resolution_y = 720  # Y resolution of a camera - DO NOT CHANGE
-        dim_x = random.uniform(0.03, 0.06)  # size of object in X direction
-        dim_y = random.uniform(0.03, 0.06)  # size of object in Y direction
-        dim_z = random.uniform(0.03, 0.06)  # size of object in Z direction
-        x_position = 1.7777777  # X position of a camera - DO NOT CHANGE
-        z_position = 1  # Z position of a camera - DO NOT CHANGE
-
-        light_type = 'POINT'
-        room_illumination = random.uniform(4, 7)  # constant illumination
         if render_material == 'Plastic':
             materials = plastic_profiles[material_choose]  # material settings
         elif render_material == 'Glass':
             materials = glass_profiles[material_choose]
         else:
             raise Exception('Choose between Plastic or Glass material')
+        light_type = 'POINT'
+        room_illumination = random.uniform(4, 7)  # constant illumination
+        dim_x = random.uniform(0.03, 0.06)  # size of object in X direction
+        dim_y = random.uniform(0.03, 0.06)  # size of object in Y direction
+        dim_z = random.uniform(0.03, 0.06)  # size of object in Z direction
         rotation_x = math.radians(
             random.uniform(0, 1))  # rotation of moving object in each step - X axis (write in degrees)
         rotation_y = math.radians(
             random.uniform(0, 1))  # rotation of moving object in each step - Y axis (write in degrees)
         rotation_z = math.radians(
             random.uniform(0, 1))  # rotation of moving object in each step - Z axis (write in degrees)
-        light_energy = random.uniform(15, 25)  # how strong strong can be 'SUN'
+        light_energy = random.uniform(15, 25)  # how strong can be 'SUN'
         light_position = [0, -1.4, 0.3]  # position of the light at the first frame
         light_position_noise = [-0.2, -0.4, -0.1, 0.2, 0, 0.1]  # for how much can position of the light change
         include_distractor = distractor_include  # 0 or 1 - do we include distractors
@@ -955,8 +962,7 @@ if __name__ == '__main__':
         add_occlusion_vertical = False  # True - add vertical occlusion
         distractor_follow_object = True  # True - one distractor following
         over_the_edge = 0.9
-        blur_intensity_vec = [1 / 8, 1 / 4, 1 / 2]  # 1/8 # between 0 and 1, where 0 = No blur, 1 = very high blur
-        blur_names = ["low_blur", "medium_blur", "high_blur"]
+
         blur_idx = random.randint(0, 2)
         occlusion_idx = random.randint(0, 2)
         line_width = occlusion_types[occlusion_idx]
@@ -964,7 +970,7 @@ if __name__ == '__main__':
         occlusion_color = (random.random(), random.random(), random.random())
 
         # probability 0.15 to include blur
-        if random.random() <= 1: #0.15:
+        if random.random() <= 0.15:
             blur_include = True
             blur_intensity = blur_intensity_vec[blur_idx]
             blur_name = blur_names[blur_idx]
