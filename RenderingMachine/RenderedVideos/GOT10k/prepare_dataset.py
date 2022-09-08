@@ -170,19 +170,19 @@ class PrepareGotDataset:
             except Exception as e:
                 print(e)
                 pass
-        file_list = list(sorted(file_list))
+        #file_list = list(sorted(file_list))
 
-        all_files_split = len(file_list)
+        #all_files_split = len(file_list)
 
-        train_num = [str(x) for x in range(all_files_split)]
+        #train_num = [str(x) for x in range(all_files_split)]
 
-        with open("got10k_train_full_split.txt", "w") as t:
-            for item in train_num:
-                t.write("%s\n" % item)
+        #with open("got10k_train_full_split.txt", "w") as t:
+        #    for item in train_num:
+        #        t.write("%s\n" % item)
 
-        with open('list.txt', "w") as g:
-            for item in file_list:
-                g.write("%s\n" % item)
+        #with open('list.txt', "w") as g:
+        #    for item in file_list:
+        #        g.write("%s\n" % item)
 
 
 if __name__ == "__main__":

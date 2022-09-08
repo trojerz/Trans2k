@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-video_dirs = list(sorted([os.path.join('GoT', p) for p in os.listdir('GoT')]))
+video_dirs = list(sorted([os.path.join('GOT10k', p) for p in os.listdir('GOT10k')]))
 print(video_dirs)
 
 for vid_ in video_dirs:

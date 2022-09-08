@@ -7,6 +7,7 @@ from scipy import interpolate
 import random
 import bpy
 import time
+import sys
 
 class Preprocessing:
     def __init__(self, got_directory, result_directory, choose_n, only_new_videos, already_rendered):
@@ -108,7 +109,8 @@ class TransparentObjectRender:
                  blur_intensity,
                  line_width,
                  occlusion_color,
-                 material_type):
+                 material_type,
+                 debug_mode):
 
         self.x_position, self.z_position = x_position, z_position
         self.k, self.overwrite_k = k, overwrite_k
@@ -145,6 +147,7 @@ class TransparentObjectRender:
         self.original_object_dimension = None
         self.random_radius = random.uniform(1, 2)
         self.material_type = material_type
+        self.debug_mode = debug_mode
 
         self.previous_object_size = (0, 0, 0)
         self.previous_distractor_size = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
@@ -791,14 +794,15 @@ class TransparentObjectRender:
             # motion from start frame to next
             bpy.context.scene.cycles.motion_blur_position = 'START'
 
-        data = bproc.renderer.render()
-        ##data = bpy.ops.render.render(use_viewport = True, write_still=True)
-        seg_data = bproc.renderer.render_segmap(map_by=["instance", "class", "name"])
-        bproc.writer.write_coco_annotations(self.output_path,
-                                            instance_segmaps=seg_data["instance_segmaps"],
-                                            instance_attribute_maps=seg_data["instance_attribute_maps"],
-                                            colors=data["colors"],
-                                            append_to_existing_output=False)
+        if self.debug_mode == 0:
+            data = bproc.renderer.render()
+            ##data = bpy.ops.render.render(use_viewport = True, write_still=True)
+            seg_data = bproc.renderer.render_segmap(map_by=["instance", "class", "name"])
+            bproc.writer.write_coco_annotations(self.output_path,
+                                                instance_segmaps=seg_data["instance_segmaps"],
+                                                instance_attribute_maps=seg_data["instance_attribute_maps"],
+                                                colors=data["colors"],
+                                                append_to_existing_output=False)
 
 
 
@@ -866,8 +870,11 @@ skip_sequences = list()
 k = 5
 # set Plastic or Glass
 render_material = 'Plastic'
-# debug mode
-debug_mode = 0
+
+if len(sys.argv) == 2:
+    debug_mode = sys.argv
+else:
+    debug_mode = 0
 
 
 
@@ -1052,6 +1059,6 @@ if __name__ == '__main__':
                                          add_occlusion=add_occlusion, add_occlusion_vertical=add_occlusion_vertical,
                                          distractor_follow_object=distractor_follow_object, over_the_edge=over_the_edge,
                                          blur_intensity=blur_intensity, line_width=line_width,
-                                         occlusion_color=occlusion_color, material_type=render_material)
+                                         occlusion_color=occlusion_color, material_type=render_material, debug_mode=debug_mode)
         render.construct_scene()
     print('Rendering complete!')
