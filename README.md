@@ -1,19 +1,26 @@
-# Rendering Machine and Trans2k dataset
+# Trans2k Dataset and Rendering Engine
 
 ![](example.gif)
 
+
 ## Citation 
 
-If you use Trans2k or Rendering Machine in a research project, please cite as follows:
+If you use Trans2k or Rendering Engine in a research project, please cite as follows:
 
 ```
 add here
 ```
 
-## Trans2k
+Visual object tracking has focused predominantly on opaque objects, while transparent object tracking received very little attention. Motivated by the uniqueness of transparent objects in that their appearance is directly affected by the background, the first dedicated evaluation dataset has emerged recently.
+We contribute to this effort by proposing the first transparent object tracking training dataset Trans2k that consists of over 2k sequences with 104,343 images overall, annotated by bounding boxes and segmentation masks. Noting that transparent objects can be realistically rendered by modern renderers, we quantify domain-specific attributes and render the dataset containing visual attributes and tracking situations not covered in the existing object training datasets. We observe a consistent performance boost (up to 16%) across a diverse set of modern tracking architectures when trained using Trans2k, and show insights not previously possible due to the lack of appropriate training sets.
+
+
+## Trans2k Dataset
+Trans2k dataset contains 2,039 challenging sequences and 104,343 frames in total. We provide the ground truth in two standard forms, the widely accepted target enclosing axis-aligned bounding-box and the segmentation mask.
+
 Transparent training dataset Trans2k and trained models are available: [here](Trans2k/README.md)
 
-## Installation
+## Installation of Rendering Engine
 
 ### Git clone
 
@@ -58,18 +65,18 @@ All images in GOT-10k should first be the resized to 1280x720 (otherwise, backgr
 python preprocess_dataset.py
 ```
 
-## Usage
+## Usage of Rendering Engine
 
 ### Examples
 
 * [Basic scene](Examples/basic_scene/README.md): Basic example for construction of the scene, this is the ideal place to get an idea how sequences are generated.
-* [Advanced  tutorial](Examples/advanced/README.md): for advanced user: how to change parameters, different settings for rendering machine.
+* [Advanced  tutorial](Examples/advanced/README.md): for advanced user: how to change parameters, different settings for rendering engine.
 
 ### Generating dataset
 
 
-Rendering Machine has to be run inside the blender python environment, as only there we can access the blender API. 
-Therefore, instead of running rendering machine with the usual python interpreter, the command line interface of BlenderProc has to be used.
+Rendering Engine has to be run inside the blender python environment, as only there we can access the blender API. 
+Therefore, instead of running rendering engine with the usual python interpreter, the command line interface of BlenderProc has to be used.
 
 ```bash
 blenderproc run rendeding_machine.py
@@ -77,7 +84,7 @@ blenderproc run rendeding_machine.py
 
 In general, one run of the script first loads or constructs a 3D scene, then sets some camera poses inside this scene and renders a transparent object on background for each of those camera poses. Usually, the script is run multiple times, each time producing one sequence containing around 50 images (it is recommended to not increase the length, because of memory issues).
 
-### Debugging in the Blender GUI
+### Debugging in the Blender UI
 
 To understand how the scene in constructed, BlenderProc has the great feature of visualizing everything inside the blender UI.
 To do so, call the script with the additional `debug` instead of `run` subcommand and add additional argument `1`:
@@ -86,7 +93,7 @@ To do so, call the script with the additional `debug` instead of `run` subcomman
 blenderproc debug rendeding_machine.py 1
 ```
 
-Now the Blender UI opens up, the scripting tab is selected and the correct script is loaded. To start the Rendering Machine pipeline, one now just has to press `Run BlenderProc`. Note that sequences will not be rendered, only the scene will be generated inside blender UI.
+Now the Blender UI opens up, the scripting tab is selected and the correct script is loaded. To start the Rendering Engine pipeline, one now just has to press `Run BlenderProc`. Note that sequences will not be rendered, only the scene will be generated inside blender UI.
 
 ### Post-processing of data
 
