@@ -1,5 +1,7 @@
 # Rendering Machine and Trans2k dataset
 
+![](example.gif)
+
 ## Citation 
 
 If you use Trans2k or Rendering Machine in a research project, please cite as follows:
