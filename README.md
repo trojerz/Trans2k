@@ -8,7 +8,12 @@
 If you use Trans2k or Rendering Engine in a research project, please cite as follows:
 
 ```
-add here
+@InProceedings{trans2k_bmvc2022,
+  Title = {Trans2k: Unlocking the Power of Deep Models for Transparent Object Tracking},
+  Author = {Lukezic, Alan and Trojer, Ziga and Matas, Jiri and Kristan, Matej},
+  Booktitle = {In Proceedings of the British Machine Vision Conference (BMVC)},
+  Year = {2022}
+}
 ```
 
 Visual object tracking has focused predominantly on opaque objects, while transparent object tracking received very little attention. Motivated by the uniqueness of transparent objects in that their appearance is directly affected by the background, the first dedicated evaluation dataset has emerged recently.
