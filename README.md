@@ -23,6 +23,8 @@ We contribute to this effort by proposing the first transparent object tracking 
 ## Trans2k Dataset
 Trans2k dataset contains 2,039 challenging sequences and 104,343 frames in total. We provide the ground truth in two standard forms, the widely accepted target enclosing axis-aligned bounding-box and the segmentation mask.
 
+The dataset is available for download [here](https://alanl@data.vicos.si/alanl/trans2k.zip). This is a compressed version of the dataset, which size is approximately 7.5 GB and uses a jpeg compression. The uncompressed version (approx. 125 GB), which could be used to exactly reproduce the results from the paper is available on request only. If you would like to get the uncompressed dataset, please contact alan.lukezic@fri.uni-lj.si. Note that the visual difference between frames from both versions is minor.
+
 
 ### Trained models with setting files
 Trained models with Trans2k are available [here](https://drive.google.com/drive/folders/1EjXEqPa2WuQtixvFkTG9_kzAhVdTp2xC?usp=sharing). Original TOTB dataset can be found [here](https://hengfan2010.github.io/projects/TOTB/) and dataset, appropriate for Stark and Pytracking can be found [here](https://drive.google.com/drive/folders/1vkrWedoy5_VoRXUmmZwrAu7rv5tImrhl?usp=sharing). You can find additional files that can help you setting the environment for training/evaluating different trackers in the `Trans2k` folder.
